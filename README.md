@@ -1,2 +1,5 @@
 # quick-service-cli
-quick way to generate service
+
+- quick way to generate service
+
+## How to use

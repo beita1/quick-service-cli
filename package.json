@@ -2,12 +2,14 @@
   "name": "quick-service-cli",
   "version": "1.0.0",
   "description": "quick way to generate service",
-  "main": "index.js",
+  "main": "app.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "mocha --timeout 10000 --file ./test/setup.js ./test/",
+    "debug": "mocha --timeout 10000 --file ./test/setup.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,31 @@
   "devDependencies": {
     "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^32.3.0",
+    "eslint-plugin-mocha": "^8.1.0",
     "husky": "^4.3.8",
+    "mocha": "^8.3.2",
     "validate-commit-msg": "^2.14.0"
+  },
+  "dependencies": {
+    "@koa/router": "^10.0.0",
+    "chai": "^4.3.0",
+    "config": "^3.3.3",
+    "joi": "^17.4.0",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "lodash": "^4.17.20",
+    "log4js": "^6.3.0",
+    "mongoose": "^5.11.15",
+    "node-fetch": "^2.6.1",
+    "querystring": "^0.2.1",
+    "restify-errors": "^8.0.2",
+    "uuid": "^8.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "validate-commit-msg"
+    }
   }
 }
