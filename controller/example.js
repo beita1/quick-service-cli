@@ -1,5 +1,6 @@
 
 const userValidate = require('../validation/example');
+const userMiddleware = require('../middleware/example');
 
 module.exports = (api) => {
   api.post(
@@ -9,7 +10,7 @@ module.exports = (api) => {
       skipAuth: true,
     },
     [
-      // userMiddleware.createUser,
+      userMiddleware.createUser,
     ]
   );
 
@@ -20,7 +21,7 @@ module.exports = (api) => {
       skipAuth: true,
     },
     [
-      // userMiddleware.getUser,
+      userMiddleware.getUser,
     ]
   );
 
@@ -31,7 +32,7 @@ module.exports = (api) => {
       skipAuth: true,
     },
     [
-      // userMiddleware.deleteUser
+      userMiddleware.deleteUser
     ]
   );
 
@@ -42,7 +43,7 @@ module.exports = (api) => {
       skipAuth: true,
     },
     [
-      // userMiddleware.updateUser
+      userMiddleware.updateUser
     ]
   )
 }

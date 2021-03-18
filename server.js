@@ -1,8 +1,13 @@
 const Koa = require('koa');
+const conditional = require('koa-conditional-get');
+const etag = require('koa-etag');
+const cors = require('koa2-cors');
+const helmet = require('koa-helmet');
 const config = require('config');
 const bodyParser = require('koa-bodyparser');
 
 const { logger } = require('./lib');
+const mongo = require('./lib/mongo');
 const {
   logHandler, formatHandler, errorHandler, contextHandler,
 } = require('./middleware');
@@ -12,9 +17,9 @@ const app = new Koa();
 
 const gracefulShutdown = () => {
   // db shutdown
+  mongo.shutdown();
 
   // server.close
-
   process.exitCode = 1;
 }
 
@@ -22,13 +27,31 @@ module.exports.init = async () => {
   logger.info('init server');
 
   // init service
+  await mongo.init();
+
+  // db.init
 
   // register router
-  app.use(contextHandler);
   app.use(errorHandler);
+
+  app.use(conditional());
+  app.use(etag());
+
+  app.use(contextHandler);
   app.use(logHandler);
   app.use(formatHandler);
+
   app.use(bodyParser());
+  // HTTP header security
+  app.use(helmet());
+  // Enable CORS for all routes
+  app.use(cors({
+    origin: '*',
+    allowMethods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Accept'],
+    exposeHeaders: ['spacex-api-cache', 'spacex-api-response-time'],
+  }));
+
   router.register(app);
 
   app.listen(config.get('listen_port'));

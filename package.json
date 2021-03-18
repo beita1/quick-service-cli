@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "mocha --timeout 10000 --file ./test/setup.js ./test/",
+    "test": "mocha --timeout 10000 --file ./test/setup.js ./test/example",
     "debug": "mocha --timeout 10000 --file ./test/setup.js"
   },
   "repository": {
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/beita1/quick-service-cli#readme",
   "devDependencies": {
+    "chai": "^4.3.4",
     "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
@@ -33,11 +34,14 @@
   },
   "dependencies": {
     "@koa/router": "^10.0.0",
-    "chai": "^4.3.0",
     "config": "^3.3.3",
     "joi": "^17.4.0",
     "koa": "^2.13.1",
     "koa-bodyparser": "^4.3.0",
+    "koa-conditional-get": "^3.0.0",
+    "koa-etag": "^4.0.0",
+    "koa-helmet": "^6.1.0",
+    "koa2-cors": "^2.0.6",
     "lodash": "^4.17.20",
     "log4js": "^6.3.0",
     "mongoose": "^5.11.15",
